@@ -9,7 +9,7 @@ const url = "mongodb+srv://usersdatabase:FGBhXp36eG0fO0dy@cluster0.f4yku3x.mongo
 
 const app = express();
 app.use(express.json());
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors({ credentials: true, origin: 'https://loginpagefrontend.onrender.com',methods: ['GET', 'POST', 'PUT', 'DELETE'], }));
 app.use(cookieParser());
 
 
