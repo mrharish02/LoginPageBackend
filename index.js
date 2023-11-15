@@ -44,7 +44,7 @@ app.post('/', async(req, res) => {
                                        secure:true,
                                        domain:"onrender.com"
                                        })
-                res.json({status:'success',user:true})
+                res.json({status:'success',user:true,jwt:token})
         } else {
             console.log("Invalid Details");
             res.json({status:'invalid',user:false})
