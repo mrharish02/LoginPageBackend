@@ -42,7 +42,7 @@ app.post('/', async(req, res) => {
                                        path:"/",
                                        sameSite:"none",
                                        secure:true,
-                                       domain:".onrender.com"
+                                       domain:"fri-admin-pr-31.onrender.com"
                                        })
                 res.json({status:'success',user:true})
         } else {
