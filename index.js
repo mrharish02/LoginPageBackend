@@ -40,6 +40,8 @@ app.post('/', async(req, res) => {
                 const token = jwt.sign({email:user.email,name:user.name},'thisissecuredtransmissionofpasswordsandusernameandnoonecanaccessitatanycostwhatsoeveritisconfidential',{expiresIn:'1h'})
                 res.cookie('jwt',token,{httpOnly:true,
                                        path:"/",
+                                       sameSite:"None",
+                                       // secure:true,
                                        domain:"onrender.com"
                                        })
                 res.json({status:'success',user:true,jwt:token})
