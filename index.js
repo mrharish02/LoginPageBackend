@@ -41,7 +41,7 @@ app.post('/', async(req, res) => {
                 res.cookie('jwt',token,{httpOnly:true,
                                        path:"/",
                                        sameSite:"None",
-                                       secure:true,
+                                       // secure:true,
                                        domain:"onrender.com"
                                        })
                 res.json({status:'success',user:true,jwt:token})
