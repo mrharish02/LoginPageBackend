@@ -9,14 +9,14 @@ const url = "mongodb+srv://usersdatabase:FGBhXp36eG0fO0dy@cluster0.f4yku3x.mongo
 
 const app = express();
 app.use(express.json());
-// app.use(cors({ credentials: true, origin: 'https://loginpagefrontend.onrender.com',methods: ['GET', 'POST', 'PUT', 'DELETE'], }));
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://loginpagefrontend.onrender.com');
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
+app.use(cors({ credentials: true, origin: 'https://loginpagefrontend.onrender.com',methods: ['GET', 'POST', 'PUT', 'DELETE'] }));
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', 'https://loginpagefrontend.onrender.com');
+//     res.header('Access-Control-Allow-Credentials', true);
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     next();
+// });
 app.use(cookieParser());
 
 
@@ -45,13 +45,14 @@ app.post('/', async(req, res) => {
                 console.log("Verified");
                 console.log(user);
                 const token = jwt.sign({email:user.email,name:user.name},'thisissecuredtransmissionofpasswordsandusernameandnoonecanaccessitatanycostwhatsoeveritisconfidential',{expiresIn:'1h'})
-                // res.cookie('jwt',token,{httpOnly:true,
-                //                        path:"/",
-                //                        sameSite:"Lax",
-                //                        // secure:true,
-                //                        domain:"onrender.com"
-                //                        })
-                res.header('Set-Cookie', `jwt=${token}; Path=/; HttpOnly; SameSite=Lax; Domain=onrender.com`);
+                res.cookie('jwt',token,{
+                                       // httpOnly:true,
+                                       path:"/",
+                                       sameSite:"Lax",
+                                       secure:true,
+                                       domain:"onrender.com"
+                                       })
+                // res.header('Set-Cookie', `jwt=${token}; Path=/; HttpOnly; SameSite=Lax; Domain=onrender.com`);
                 res.json({status:'success',user:true,jwt:token})
         } else {
             console.log("Invalid Details");
