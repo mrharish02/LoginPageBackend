@@ -45,12 +45,13 @@ app.post('/', async(req, res) => {
                 console.log("Verified");
                 console.log(user);
                 const token = jwt.sign({email:user.email,name:user.name},'thisissecuredtransmissionofpasswordsandusernameandnoonecanaccessitatanycostwhatsoeveritisconfidential',{expiresIn:'1h'})
-                res.cookie('jwt',token,{httpOnly:true,
-                                       path:"/",
-                                       sameSite:"Lax",
-                                       // secure:true,
-                                       domain:"onrender.com"
-                                       })
+                // res.cookie('jwt',token,{httpOnly:true,
+                //                        path:"/",
+                //                        sameSite:"Lax",
+                //                        // secure:true,
+                //                        domain:"onrender.com"
+                //                        })
+                res.header('Set-Cookie', `jwt=${token}; Path=/; HttpOnly; SameSite=Lax; Domain=onrender.com`);
                 res.json({status:'success',user:true,jwt:token})
         } else {
             console.log("Invalid Details");
